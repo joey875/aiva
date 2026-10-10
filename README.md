@@ -1,6 +1,6 @@
 # Aiva
 
-Sales CRM with an AI assistant (Ava). Multi-tenant: **accounts → companies → salespeople → customers**.
+Sales CRM with an AI virtual assistant, Aiva (pronounced "Ava"). Multi-tenant: **accounts → companies → salespeople → customers**.
 
 Stack: Next.js 16 (App Router) · TypeScript · Tailwind v4 · Supabase (Postgres, Auth, RLS).
 
@@ -54,4 +54,4 @@ The company switcher in the top band changes which pipeline you're working in; t
 
 ## Live database
 
-Supabase project `aiva` (ref `jzggvasbaqdycduyyvje`, us-east-1). Migrations 0001–0003 applied, seeded, and the 25 RLS checks pass against it. Supabase's advisor flags `google_connections` and `bootstrap_admins` as "RLS enabled, no policy" — intentional, both are server-only.
+Supabase project `aiva` (ref `jzggvasbaqdycduyyvje`, us-east-1). Migrations 0001–0004 applied, seeded, and the 25 RLS checks pass against it. Supabase's advisor flags `google_connections` and `bootstrap_admins` as "RLS enabled, no policy" — intentional, both are server-only.

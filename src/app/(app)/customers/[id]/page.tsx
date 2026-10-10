@@ -83,7 +83,7 @@ export default async function CustomerPage({ params }: PageProps<"/customers/[id
                   <p className={a.kind === "note" ? "whitespace-pre-wrap" : "font-medium"}>{a.summary}</p>
                   <p className="text-sm text-ink-soft">
                     {formatDateTime(a.created_at)}
-                    {a.actor_type === "assistant" ? ", Ava" : a.actor_id ? `, ${names.get(a.actor_id) ?? "Team member"}` : ""}
+                    {a.actor_type === "assistant" ? ", Aiva" : a.actor_id ? `, ${names.get(a.actor_id) ?? "Team member"}` : ""}
                   </p>
                 </li>
               ))}
