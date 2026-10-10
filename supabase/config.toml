@@ -29,5 +29,5 @@ host = "smtp.resend.com"
 port = 465
 user = "resend"
 pass = "env(RESEND_API_KEY)"
-admin_email = "ava@golocaltv.com"
+admin_email = "aiva@golocaltv.com"
 sender_name = "Aiva"
