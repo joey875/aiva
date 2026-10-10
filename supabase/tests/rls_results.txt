@@ -1,0 +1,25 @@
+RLS REPORT: ALL PASSED
+[PASS] rep X sees only own customers (got 1, want 1)
+[PASS] rep X cannot read rep Y's customer in shared company
+[PASS] rep X cannot read another account's customer
+[PASS] rep X sees only assigned companies (got 1, want 1)
+[PASS] rep X sees only own profile (got 1, want 1)
+[PASS] rep X cannot read Google tokens table (got 0 rows)
+[PASS] rep X cannot add customer to an unassigned company
+[PASS] rep X cannot create a customer owned by another rep
+[PASS] rep X cannot edit rep Y's customer (rows changed 0)
+[PASS] rep X cannot promote self
+[PASS] activity log is append-only
+[PASS] spoofed account_id is overwritten from company
+[PASS] rep Y sees own customers across both assigned companies (got 2, want 2)
+[PASS] appointment cannot cross companies (customer in A2, appt in A1)
+[PASS] deactivated rep sees nothing (got 0)
+[PASS] other-account rep sees zero of account A's customers
+[PASS] other-account rep sees zero of account A's companies
+[PASS] account admin sees zero customers in another account
+[PASS] account admin sees all customers in own account (got 5, want 5)
+[PASS] account admin sees zero users in another account
+[PASS] account admin cannot grant super admin
+[PASS] super admin sees every account (got 6, want 6)
+[PASS] activity log blocks edits even server-side
+CONTEXT:  PL/pgSQL function inline_code_block line 193 at RAISE

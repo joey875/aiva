@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/* Aiva tokens. Each company also brings its own brand color (set per company),
+   which tints the top band so a rep always knows which pipeline they're in. */
+:root {
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --surface-2: #eef1f4;
+  --ink: #15202b;
+  --ink-soft: #55636f;
+  --line: #dbe1e7;
+  --ava: #0e7c7b;
+  --ava-ink: #ffffff;
+  --attention: #b7791f;
+  --attention-bg: #fdf3e1;
+  --danger: #c2412d;
+  --danger-bg: #fbeae6;
+  --ok: #2f7d4f;
+  --brand: #0e7c7b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e151c;
+    --surface: #16202a;
+    --surface-2: #1d2935;
+    --ink: #e6ebf0;
+    --ink-soft: #9aa8b4;
+    --line: #2a3744;
+    --ava: #3fb5b3;
+    --ava-ink: #06201f;
+    --attention: #f0b450;
+    --attention-bg: #2e2412;
+    --danger: #f08a77;
+    --danger-bg: #2f1a16;
+    --ok: #6cc391;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-ava: var(--ava);
+  --color-ava-ink: var(--ava-ink);
+  --color-attention: var(--attention);
+  --color-attention-bg: var(--attention-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-ok: var(--ok);
+  --color-brand: var(--brand);
+  --font-sans: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ava);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* Shared form controls: 48px tap targets for field use */
+@utility field {
+  display: block; width: 100%; border-radius: 0.5rem; border: 1px solid var(--line);
+  background: var(--surface); padding: 0.75rem; font-size: 1rem; color: var(--ink);
+}
+@utility label {
+  display: block; margin-bottom: 0.25rem; font-size: 0.875rem; font-weight: 500; color: var(--ink-soft);
+}
+@utility btn {
+  display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: 0.5rem;
+  border-radius: 0.5rem; padding: 0 1rem; font-size: 1rem; font-weight: 600; cursor: pointer;
+}
+@utility btn-primary {
+  background: var(--ava); color: var(--ava-ink);
+}
+@utility btn-quiet {
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+}
