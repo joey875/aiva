@@ -194,6 +194,25 @@ begin
   exception when others then ok := true; end;
   report := report || format(E'\n[%s] activity log blocks edits even server-side', case when ok then 'PASS' else 'FAIL' end); if not ok then fails := fails + 1; end if;
 
+  ok := false;
+  begin
+    delete from public.activity_log where customer_id = c_x;
+  exception when others then ok := true; end;
+  report := report || format(E'\n[%s] activity log blocks direct deletes', case when ok then 'PASS' else 'FAIL' end); if not ok then fails := fails + 1; end if;
+
+  -- ===== Admin can still delete a customer (its timeline goes with it) =====
+  perform set_config('request.jwt.claims', json_build_object('sub', u_admin_a, 'role', 'authenticated')::text, true);
+  perform set_config('request.jwt.claim.sub', u_admin_a::text, true);
+  execute 'set local role authenticated';
+  ok := true;
+  begin
+    delete from public.customers where id = c_x;
+    get diagnostics n = row_count;
+    ok := (n = 1);
+  exception when others then ok := false; end;
+  report := report || format(E'\n[%s] admin can delete a customer with timeline history', case when ok then 'PASS' else 'FAIL' end); if not ok then fails := fails + 1; end if;
+  execute 'reset role';
+
   -- ---------- report + rollback ----------
   if fails = 0 then
     raise exception 'RLS REPORT: ALL PASSED%', report;

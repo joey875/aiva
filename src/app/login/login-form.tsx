@@ -3,15 +3,22 @@
 import { useActionState } from "react";
 import { sendMagicLink, signInWithGoogle, type LoginState } from "./actions";
 
-export function LoginForm() {
-  const [state, action, pending] = useActionState<LoginState, FormData>(sendMagicLink, {});
+export function LoginForm({ google }: { google: boolean }) {
+  const [state, action, pending] = useActionState<LoginState, FormData>(
+    sendMagicLink,
+    {},
+  );
 
   if (state.sent) {
     return (
-      <div className="rounded-xl border border-line bg-surface p-5" role="status">
+      <div
+        className="rounded-xl border border-line bg-surface p-5"
+        role="status"
+      >
         <p className="text-lg font-semibold">Check your email</p>
         <p className="mt-1 text-ink-soft">
-          If that address has access, a sign-in link is on its way. It works once and expires in an hour.
+          If that address has access, a sign-in link is on its way. It works
+          once and expires in an hour.
         </p>
       </div>
     );
@@ -24,23 +31,38 @@ export function LoginForm() {
           <label htmlFor="email" className="label">
             Work email
           </label>
-          <input id="email" name="email" type="email" autoComplete="email" required className="field" />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            className="field"
+          />
         </div>
         {state.error && <p className="text-sm text-danger">{state.error}</p>}
-        <button type="submit" disabled={pending} className="btn btn-primary w-full disabled:opacity-60">
+        <button
+          type="submit"
+          disabled={pending}
+          className="btn btn-primary w-full disabled:opacity-60"
+        >
           {pending ? "Sending…" : "Email me a sign-in link"}
         </button>
       </form>
-      <div className="flex items-center gap-3 text-sm text-ink-soft">
-        <span className="h-px flex-1 bg-line" />
-        or
-        <span className="h-px flex-1 bg-line" />
-      </div>
-      <form action={signInWithGoogle}>
-        <button type="submit" className="btn btn-quiet w-full">
-          Continue with Google
-        </button>
-      </form>
+      {google && (
+        <>
+          <div className="flex items-center gap-3 text-sm text-ink-soft">
+            <span className="h-px flex-1 bg-line" />
+            or
+            <span className="h-px flex-1 bg-line" />
+          </div>
+          <form action={signInWithGoogle}>
+            <button type="submit" className="btn btn-quiet w-full">
+              Continue with Google
+            </button>
+          </form>
+        </>
+      )}
     </div>
   );
 }

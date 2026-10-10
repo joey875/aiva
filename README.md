@@ -33,7 +33,7 @@ Stack: Next.js 16 (App Router) · TypeScript · Tailwind v4 · Supabase (Postgre
 PGHOST=<socket dir> PGPORT=<port> ./supabase/tests/run_local.sh
 ```
 
-Or paste `supabase/tests/rls_verification.sql` into the Supabase SQL editor. It builds throwaway data, runs 23 checks as real users, and rolls everything back. The result arrives as an error message starting with `RLS REPORT: ALL PASSED`. Latest results: `supabase/tests/rls_results.txt`.
+Or paste `supabase/tests/rls_verification.sql` into the Supabase SQL editor. It builds throwaway data, runs 25 checks as real users, and rolls everything back. The result arrives as an error message starting with `RLS REPORT: ALL PASSED`. Latest results: `supabase/tests/rls_results.txt`.
 
 ## Built so far (001)
 
@@ -51,3 +51,7 @@ The company switcher in the top band changes which pipeline you're working in; t
 
 - Email sign-in links use PKCE, so open the link in the same browser you requested it from. Invites and admin-resent links work on any device.
 - Cache Components is turned off on purpose; nearly every screen is per-user.
+
+## Live database
+
+Supabase project `aiva` (ref `jzggvasbaqdycduyyvje`, us-east-1). Migrations 0001–0003 applied, seeded, and the 25 RLS checks pass against it. Supabase's advisor flags `google_connections` and `bootstrap_admins` as "RLS enabled, no policy" — intentional, both are server-only.

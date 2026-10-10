@@ -22,4 +22,6 @@ RLS REPORT: ALL PASSED
 [PASS] account admin cannot grant super admin
 [PASS] super admin sees every account (got 6, want 6)
 [PASS] activity log blocks edits even server-side
-CONTEXT:  PL/pgSQL function inline_code_block line 193 at RAISE
+[PASS] activity log blocks direct deletes
+[PASS] admin can delete a customer with timeline history
+CONTEXT:  PL/pgSQL function inline_code_block line 212 at RAISE

@@ -221,10 +221,15 @@ end $$;
 create trigger profiles_seed_notifications after insert on public.profiles
   for each row execute function private.seed_notification_settings();
 
--- Activity log is append-only
+-- Activity log is append-only. Rows can't be edited or deleted directly;
+-- they only disappear when their customer (or company/account) is deleted,
+-- which arrives as a cascaded delete (trigger depth > 1).
 create or replace function private.block_mutation()
 returns trigger language plpgsql set search_path = '' as $$
 begin
+  if tg_op = 'DELETE' and pg_trigger_depth() > 1 then
+    return old;
+  end if;
   raise exception 'activity_log is append-only';
 end $$;
 

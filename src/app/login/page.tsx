@@ -29,7 +29,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
           {message}
         </p>
       )}
-      <LoginForm />
+      <LoginForm google={process.env.NEXT_PUBLIC_GOOGLE_SIGNIN === "on"} />
     </main>
   );
 }
