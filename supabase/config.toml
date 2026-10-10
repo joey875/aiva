@@ -4,9 +4,9 @@ project_id = "jzggvasbaqdycduyyvje"
 
 [auth]
 enabled = true
-# __SITE_URL__ is replaced with the production host during deploy (prompt 003)
-site_url = "https://__SITE_URL__"
-additional_redirect_urls = ["https://__SITE_URL__/auth/confirm", "https://__SITE_URL__/auth/callback", "http://localhost:3000/auth/confirm", "http://localhost:3000/auth/callback"]
+# Production host set during deploy (prompt 003)
+site_url = "https://aiva-go-local1.vercel.app"
+additional_redirect_urls = ["https://aiva-go-local1.vercel.app/auth/confirm", "https://aiva-go-local1.vercel.app/auth/callback", "http://localhost:3000/auth/confirm", "http://localhost:3000/auth/callback"]
 jwt_expiry = 3600
 enable_refresh_token_rotation = true
 # Signups stay technically enabled so the owner can self-provision on first sign-in.
