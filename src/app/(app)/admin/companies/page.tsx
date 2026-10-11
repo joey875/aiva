@@ -10,7 +10,7 @@ export default async function CompaniesPage() {
   const me = await requireAdmin();
   const supabase = await createClient();
   const [{ data }, { data: assignments }, { data: customers }] = await Promise.all([
-    supabase.from("companies").select("id, account_id, name, brand_color, archived_at").eq("account_id", me.account_id).order("name"),
+    supabase.from("companies").select("id, account_id, name, archived_at").eq("account_id", me.account_id).order("name"),
     supabase.from("company_reps").select("company_id").eq("account_id", me.account_id),
     supabase.from("customers").select("company_id").eq("account_id", me.account_id),
   ]);
@@ -25,14 +25,9 @@ export default async function CompaniesPage() {
         {active.map((c) => (
           <li key={c.id} className="rounded-xl border border-border bg-surface p-4">
             <form action={updateCompany.bind(null, c.id)} className="flex flex-wrap items-end gap-3">
-              <span aria-hidden className="h-12 w-2 rounded-full" style={{ background: c.brand_color ?? "var(--primary)" }} />
               <div className="min-w-48 flex-1">
                 <label className="label" htmlFor={`name-${c.id}`}>Name</label>
                 <input id={`name-${c.id}`} name="name" defaultValue={c.name} className="field" required />
-              </div>
-              <div>
-                <label className="label" htmlFor={`color-${c.id}`}>Color</label>
-                <input id={`color-${c.id}`} name="brand_color" type="color" defaultValue={c.brand_color ?? "#0176d3"} className="h-12 w-16 cursor-pointer rounded-lg border border-border bg-surface p-1" />
               </div>
               <button className="btn btn-quiet">Save</button>
             </form>

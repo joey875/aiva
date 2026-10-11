@@ -18,7 +18,7 @@ export const getCompanyContext = cache(async () => {
 
   const { data } = await supabase
     .from("companies")
-    .select("id, account_id, name, brand_color, archived_at")
+    .select("id, account_id, name, archived_at")
     .eq("account_id", profile.account_id)
     .is("archived_at", null)
     .order("name");

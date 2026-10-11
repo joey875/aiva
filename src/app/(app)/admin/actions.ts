@@ -9,7 +9,6 @@ import { env } from "@/lib/env";
 
 export type AdminState = { error?: string; ok?: string };
 
-const HEX = /^#[0-9a-fA-F]{6}$/;
 const clean = (v: FormDataEntryValue | null) => String(v ?? "").trim();
 
 async function audit(action: string, target_table: string, target_id: string | null, data: Record<string, unknown> = {}) {
@@ -30,13 +29,12 @@ async function audit(action: string, target_table: string, target_id: string | n
 export async function createCompany(_: AdminState, formData: FormData): Promise<AdminState> {
   const profile = await requireAdmin();
   const name = clean(formData.get("name"));
-  const color = clean(formData.get("brand_color"));
   if (!name) return { error: "Give the company a name." };
 
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("companies")
-    .insert({ account_id: profile.account_id, name, brand_color: HEX.test(color) ? color : null })
+    .insert({ account_id: profile.account_id, name })
     .select("id")
     .single();
   if (error || !data) return { error: "Couldn't add the company. Try again." };
@@ -49,10 +47,9 @@ export async function createCompany(_: AdminState, formData: FormData): Promise<
 export async function updateCompany(id: string, formData: FormData) {
   await requireAdmin();
   const name = clean(formData.get("name"));
-  const color = clean(formData.get("brand_color"));
   if (!name) return;
   const supabase = await createClient();
-  await supabase.from("companies").update({ name, brand_color: HEX.test(color) ? color : null }).eq("id", id);
+  await supabase.from("companies").update({ name }).eq("id", id);
   await audit("company.updated", "companies", id, { name });
   revalidatePath("/", "layout");
 }
