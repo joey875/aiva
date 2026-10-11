@@ -12,7 +12,7 @@ with acct as (
 )
 insert into public.companies (account_id, name, brand_color)
 select acct.id, c.name, c.color
-from acct, (values ('Secure Trade', '#1d4f91'), ('Go Local TV', '#b4235a'), ('Shop Local Rewards', '#23743a')) as c(name, color)
+from acct, (values ('Secure Trade', '#0176D3'), ('Go Local TV', '#0176D3'), ('Shop Local Rewards', '#0176D3')) as c(name, color)
 where not exists (
   select 1 from public.companies x where x.account_id = acct.id and x.name = c.name
 );
