@@ -195,7 +195,7 @@ export function AivaVoice() {
     state === "listening" ? "Listening…" : state === "thinking" ? "Aiva is thinking…" : state === "speaking" ? "Aiva is speaking - tap to stop" : "Talk to Aiva";
 
   return (
-    <div className="fixed right-4 z-30 flex flex-col items-end gap-2 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] md:bottom-[calc(1.5rem+env(safe-area-inset-bottom))]">
+    <div className="fixed right-4 bottom-[calc(1.5rem+env(safe-area-inset-bottom))] z-40 flex flex-col items-end gap-2">
       <div aria-live="polite" className="sr-only">
         {label}
       </div>

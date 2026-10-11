@@ -1,28 +1,44 @@
+import { createClient } from "@/lib/supabase/server";
 import { getCompanyContext } from "@/lib/companies";
 import { isAdmin } from "@/lib/types";
-import { AivaVoice } from "@/components/aiva-voice";
-import { CompanySwitcher } from "@/components/company-switcher";
-import { Nav } from "@/components/nav";
+import { AppShell } from "@/components/shell/app-shell";
 
 export default async function AppLayout({ children }: LayoutProps<"/">) {
   const { profile, companies, current } = await getCompanyContext();
+  const admin = isAdmin(profile);
+
+  let taskBadge = 0;
+  let dueCount = 0;
+  if (current) {
+    const supabase = await createClient();
+    const endOfToday = new Date();
+    endOfToday.setHours(23, 59, 59, 999);
+    const [openRes, dueRes] = await Promise.all([
+      supabase.from("tasks").select("id", { count: "exact", head: true }).eq("company_id", current.id).eq("status", "open"),
+      supabase
+        .from("tasks")
+        .select("id", { count: "exact", head: true })
+        .eq("company_id", current.id)
+        .eq("status", "open")
+        .lte("due_at", endOfToday.toISOString()),
+    ]);
+    taskBadge = openRes.count ?? 0;
+    dueCount = dueRes.count ?? 0;
+  }
 
   return (
-    <div className="min-h-dvh">
-      <header className="sticky top-0 z-20 bg-primary pt-[env(safe-area-inset-top)] text-white">
-        <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-2">
-          <div className="min-w-0 flex-1">
-            <CompanySwitcher companies={companies.map((c) => ({ id: c.id, name: c.name }))} currentId={current?.id ?? null} />
-          </div>
-          <Nav admin={isAdmin(profile)} variant="top" />
-          <form action="/auth/signout" method="post">
-            <button className="min-h-11 rounded-lg px-3 text-sm font-semibold text-white/85 hover:text-white">Sign out</button>
-          </form>
-        </div>
-      </header>
-      <main className="mx-auto max-w-6xl px-4 pt-5 pb-28 md:pb-12">{children}</main>
-      <Nav admin={isAdmin(profile)} variant="bar" />
-      <AivaVoice />
-    </div>
+    <AppShell
+      companyName={current?.name ?? null}
+      companies={companies.map((c) => ({ id: c.id, name: c.name, brand_color: c.brand_color }))}
+      currentId={current?.id ?? null}
+      admin={admin}
+      fullName={profile.full_name}
+      email={profile.email}
+      roleLabel={admin ? "Admin" : "Rep"}
+      taskBadge={taskBadge}
+      dueCount={dueCount}
+    >
+      {children}
+    </AppShell>
   );
 }
