@@ -51,11 +51,11 @@ export function PipelineBoard({ stages, cards }: { stages: Stage[]; cards: Card[
               setDragId(null);
               if (id) move(id, stage.id);
             }}
-            className={`flex w-[82vw] max-w-72 shrink-0 snap-start flex-col rounded-xl bg-surface-2 p-2 sm:w-72 ${overStage === stage.id ? "ring-2 ring-ava" : ""}`}
+            className={`flex w-[82vw] max-w-72 shrink-0 snap-start flex-col rounded-xl bg-surface-2 p-2 sm:w-72 ${overStage === stage.id ? "ring-2 ring-primary" : ""}`}
           >
             <h2 className="flex items-center justify-between px-2 py-1.5 font-bold">
               {stage.name}
-              <span className="text-sm font-semibold text-ink-soft">{list.length}</span>
+              <span className="text-sm font-semibold text-text-muted">{list.length}</span>
             </h2>
             <ul className="flex min-h-24 flex-col gap-2">
               {list.map((card) => (
@@ -67,14 +67,14 @@ export function PipelineBoard({ stages, cards }: { stages: Stage[]; cards: Card[
                     setDragId(card.id);
                   }}
                   onDragEnd={() => setDragId(null)}
-                  className={`rounded-lg bg-surface p-3 shadow-[inset_0_0_0_1px_var(--line)] ${dragId === card.id ? "opacity-50" : ""}`}
+                  className={`rounded-lg bg-surface p-3 shadow-[inset_0_0_0_1px_var(--border)] ${dragId === card.id ? "opacity-50" : ""}`}
                 >
                   <Link href={`/customers/${card.id}`} className="block font-semibold hover:underline">
                     {card.name}
                   </Link>
-                  {card.owner && <p className="text-sm text-ink-soft">{card.owner}</p>}
+                  {card.owner && <p className="text-sm text-text-muted">{card.owner}</p>}
                   {card.nextStep && (
-                    <p className={`mt-1 text-sm ${card.overdue ? "font-semibold text-attention" : "text-ink-soft"}`}>
+                    <p className={`mt-1 text-sm ${card.overdue ? "font-semibold text-attention" : "text-text-muted"}`}>
                       {card.overdue ? "Overdue: " : ""}
                       {card.nextStep}
                     </p>
@@ -84,7 +84,7 @@ export function PipelineBoard({ stages, cards }: { stages: Stage[]; cards: Card[
                     <select
                       value={card.stageId ?? ""}
                       onChange={(e) => move(card.id, e.target.value)}
-                      className="min-h-10 w-full rounded-md border border-line bg-surface px-2 text-sm text-ink-soft"
+                      className="min-h-10 w-full rounded-md border border-border bg-surface px-2 text-sm text-text-muted"
                     >
                       {stages.map((s) => (
                         <option key={s.id} value={s.id}>{s.id === card.stageId ? `In ${s.name}` : `Move to ${s.name}`}</option>

@@ -23,20 +23,20 @@ export default async function CompaniesPage() {
     <div className="space-y-8">
       <ul className="space-y-3">
         {active.map((c) => (
-          <li key={c.id} className="rounded-xl border border-line bg-surface p-4">
+          <li key={c.id} className="rounded-xl border border-border bg-surface p-4">
             <form action={updateCompany.bind(null, c.id)} className="flex flex-wrap items-end gap-3">
-              <span aria-hidden className="h-12 w-2 rounded-full" style={{ background: c.brand_color ?? "var(--ava)" }} />
+              <span aria-hidden className="h-12 w-2 rounded-full" style={{ background: c.brand_color ?? "var(--primary)" }} />
               <div className="min-w-48 flex-1">
                 <label className="label" htmlFor={`name-${c.id}`}>Name</label>
                 <input id={`name-${c.id}`} name="name" defaultValue={c.name} className="field" required />
               </div>
               <div>
                 <label className="label" htmlFor={`color-${c.id}`}>Color</label>
-                <input id={`color-${c.id}`} name="brand_color" type="color" defaultValue={c.brand_color ?? "#0e7c7b"} className="h-12 w-16 cursor-pointer rounded-lg border border-line bg-surface p-1" />
+                <input id={`color-${c.id}`} name="brand_color" type="color" defaultValue={c.brand_color ?? "#0176d3"} className="h-12 w-16 cursor-pointer rounded-lg border border-border bg-surface p-1" />
               </div>
               <button className="btn btn-quiet">Save</button>
             </form>
-            <div className="mt-3 flex items-center justify-between gap-3 text-sm text-ink-soft">
+            <div className="mt-3 flex items-center justify-between gap-3 text-sm text-text-muted">
               <span>
                 {count(assignments, c.id)} salespeople, {count(customers, c.id)} customers
               </span>
@@ -48,7 +48,7 @@ export default async function CompaniesPage() {
         ))}
       </ul>
 
-      <section aria-labelledby="add-company" className="rounded-xl border border-dashed border-line p-4">
+      <section aria-labelledby="add-company" className="rounded-xl border border-dashed border-border p-4">
         <h2 id="add-company" className="mb-3 text-lg font-bold">Add a company</h2>
         <NewCompanyForm />
       </section>
@@ -56,13 +56,13 @@ export default async function CompaniesPage() {
       {archived.length > 0 && (
         <section aria-labelledby="archived">
           <h2 id="archived" className="mb-2 text-lg font-bold">Archived</h2>
-          <p className="mb-3 text-sm text-ink-soft">Archived companies are hidden from salespeople. Their customers are kept.</p>
-          <ul className="divide-y divide-line rounded-xl border border-line bg-surface">
+          <p className="mb-3 text-sm text-text-muted">Archived companies are hidden from salespeople. Their customers are kept.</p>
+          <ul className="divide-y divide-border rounded-xl border border-border bg-surface">
             {archived.map((c) => (
               <li key={c.id} className="flex items-center justify-between px-4 py-2">
                 <span>{c.name}</span>
                 <form action={setCompanyArchived.bind(null, c.id, false)}>
-                  <button className="min-h-11 px-2 font-semibold text-ava hover:underline">Restore</button>
+                  <button className="min-h-11 px-2 font-semibold text-primary hover:underline">Restore</button>
                 </form>
               </li>
             ))}

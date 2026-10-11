@@ -11,7 +11,7 @@ const TABS = [
 export function AdminTabs() {
   const path = usePathname();
   return (
-    <nav aria-label="Admin" className="flex gap-1 border-b border-line">
+    <nav aria-label="Admin" className="flex gap-1 border-b border-border">
       {TABS.map((t) => {
         const on = path.startsWith(t.href);
         return (
@@ -19,7 +19,7 @@ export function AdminTabs() {
             key={t.href}
             href={t.href}
             aria-current={on ? "page" : undefined}
-            className={`-mb-px min-h-11 border-b-2 px-3 py-2.5 font-semibold ${on ? "border-ava text-ink" : "border-transparent text-ink-soft hover:text-ink"}`}
+            className={`-mb-px min-h-11 border-b-2 px-3 py-2.5 font-semibold ${on ? "border-primary text-text" : "border-transparent text-text-muted hover:text-text"}`}
           >
             {t.label}
           </Link>

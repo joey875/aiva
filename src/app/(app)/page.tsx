@@ -55,7 +55,7 @@ export default async function TodayPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">{first ? `Hi ${first}.` : "Today"}</h1>
-        <p className="text-ink-soft">
+        <p className="text-text-muted">
           {appointments.length === 0 ? "No appointments today" : `${appointments.length} appointment${appointments.length === 1 ? "" : "s"} today`}
           {overdueCount > 0 ? `, ${overdueCount} overdue follow-up${overdueCount === 1 ? "" : "s"}.` : "."}
         </p>
@@ -69,7 +69,7 @@ export default async function TodayPage() {
               <li key={`c-${c.id}`}>
                 <Link href={`/customers/${c.id}`} className="block rounded-lg bg-surface px-3 py-2.5 hover:bg-surface-2">
                   <p className="font-semibold">{customerName(c)}</p>
-                  <p className="text-sm text-ink-soft">{c.next_step ?? "Follow up"}, due {relativeDay(c.next_step_at!).toLowerCase()}</p>
+                  <p className="text-sm text-text-muted">{c.next_step ?? "Follow up"}, due {relativeDay(c.next_step_at!).toLowerCase()}</p>
                 </Link>
               </li>
             ))}
@@ -85,11 +85,11 @@ export default async function TodayPage() {
       <section aria-labelledby="appts">
         <h2 id="appts" className="mb-2 text-lg font-bold">Today&apos;s appointments</h2>
         {appointments.length === 0 ? (
-          <p className="text-ink-soft">Nothing on the calendar today.</p>
+          <p className="text-text-muted">Nothing on the calendar today.</p>
         ) : (
           <ol className="space-y-2">
             {appointments.map((a) => (
-              <li key={a.id} className="flex gap-4 rounded-xl border border-line bg-surface px-4 py-3">
+              <li key={a.id} className="flex gap-4 rounded-xl border border-border bg-surface px-4 py-3">
                 <p className="w-20 shrink-0 text-lg font-bold">{formatTime(a.starts_at)}</p>
                 <div className="min-w-0">
                   {a.customers ? (
@@ -97,7 +97,7 @@ export default async function TodayPage() {
                   ) : (
                     <p className="font-semibold">{a.title ?? "Appointment"}</p>
                   )}
-                  {a.location && <p className="truncate text-sm text-ink-soft">{a.location}</p>}
+                  {a.location && <p className="truncate text-sm text-text-muted">{a.location}</p>}
                 </div>
               </li>
             ))}
@@ -108,7 +108,7 @@ export default async function TodayPage() {
       <section aria-labelledby="tasks">
         <h2 id="tasks" className="mb-2 text-lg font-bold">Open tasks</h2>
         {openTasks.length === 0 ? (
-          <p className="text-ink-soft">You&apos;re caught up.</p>
+          <p className="text-text-muted">You&apos;re caught up.</p>
         ) : (
           <ul className="space-y-2">
             {openTasks.map((t) => (
@@ -125,14 +125,14 @@ function TaskRow({ task }: { task: { title: string; due_at: string | null; custo
   const body = (
     <>
       <p className="font-semibold">{task.title}</p>
-      <p className="text-sm text-ink-soft">
+      <p className="text-sm text-text-muted">
         {[task.customers && customerName(task.customers), task.due_at && formatDateTime(task.due_at)].filter(Boolean).join(", ")}
       </p>
     </>
   );
   return task.customers ? (
-    <Link href={`/customers/${task.customers.id}`} className="block rounded-lg border border-line bg-surface px-3 py-2.5 hover:bg-surface-2">{body}</Link>
+    <Link href={`/customers/${task.customers.id}`} className="block rounded-lg border border-border bg-surface px-3 py-2.5 hover:bg-surface-2">{body}</Link>
   ) : (
-    <div className="rounded-lg border border-line bg-surface px-3 py-2.5">{body}</div>
+    <div className="rounded-lg border border-border bg-surface px-3 py-2.5">{body}</div>
   );
 }

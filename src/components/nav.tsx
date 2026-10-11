@@ -43,7 +43,7 @@ export function Nav({ admin, variant }: { admin: boolean; variant: "bar" | "top"
   return (
     <nav
       aria-label="Main"
-      className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <ul className="flex">
         {items.map((i) => (
@@ -51,7 +51,7 @@ export function Nav({ admin, variant }: { admin: boolean; variant: "bar" | "top"
             <Link
               href={i.href}
               aria-current={active(i.href) ? "page" : undefined}
-              className={`flex min-h-16 flex-col items-center justify-center gap-0.5 text-xs font-semibold ${active(i.href) ? "text-ava" : "text-ink-soft"}`}
+              className={`flex min-h-16 flex-col items-center justify-center gap-0.5 text-xs font-semibold ${active(i.href) ? "text-primary" : "text-text-muted"}`}
             >
               {i.icon}
               {i.label}

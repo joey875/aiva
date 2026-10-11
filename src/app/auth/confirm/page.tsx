@@ -39,7 +39,7 @@ export default function ConfirmPage() {
       {failed ? (
         <>
           <h1 className="text-2xl font-bold">That link didn&apos;t work</h1>
-          <p className="mt-2 text-ink-soft">It may have expired or already been used.</p>
+          <p className="mt-2 text-text-muted">It may have expired or already been used.</p>
           <a href="/login" className="btn btn-primary mt-5">Get a new sign-in link</a>
         </>
       ) : (

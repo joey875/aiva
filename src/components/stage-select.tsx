@@ -22,7 +22,7 @@ export function StageSelect({
         value={stageId ?? ""}
         disabled={pending}
         onChange={(e) => start(() => moveStage(customerId, e.target.value))}
-        className={compact ? "min-h-10 w-full rounded-md border border-line bg-surface px-2 text-sm" : "field"}
+        className={compact ? "min-h-10 w-full rounded-md border border-border bg-surface px-2 text-sm" : "field"}
       >
         {!stageId && <option value="">No stage</option>}
         {stages.map((s) => (

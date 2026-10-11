@@ -37,12 +37,12 @@ export default async function CustomerPage({ params }: PageProps<"/customers/[id
     <div className="grid gap-6 lg:grid-cols-[1fr_22rem]">
       <div className="min-w-0 space-y-6">
         <div>
-          <Link href="/customers" className="text-sm font-semibold text-ink-soft hover:text-ink">Customers</Link>
+          <Link href="/customers" className="text-sm font-semibold text-text-muted hover:text-text">Customers</Link>
           <div className="mt-1 flex items-start justify-between gap-3">
             <div className="min-w-0">
               <h1 className="text-2xl font-bold tracking-tight break-words">{customerName(c)}</h1>
               {c.business_name && c.contact_name && (
-                <p className="text-ink-soft">{c.contact_name}{c.title ? `, ${c.title}` : ""}</p>
+                <p className="text-text-muted">{c.contact_name}{c.title ? `, ${c.title}` : ""}</p>
               )}
             </div>
             <Link href={`/customers/${id}/edit`} className="btn btn-quiet shrink-0">Edit</Link>
@@ -59,7 +59,7 @@ export default async function CustomerPage({ params }: PageProps<"/customers/[id
 
         {c.next_step && (
           <div className={`rounded-xl px-4 py-3 ${overdue ? "bg-attention-bg" : "bg-surface-2"}`}>
-            <p className={`text-sm font-semibold ${overdue ? "text-attention" : "text-ink-soft"}`}>
+            <p className={`text-sm font-semibold ${overdue ? "text-attention" : "text-text-muted"}`}>
               Next step{c.next_step_at ? `, ${relativeDay(c.next_step_at).toLowerCase()} (${formatDateTime(c.next_step_at)})` : ""}
             </p>
             <p className="font-semibold">{c.next_step}</p>
@@ -74,14 +74,14 @@ export default async function CustomerPage({ params }: PageProps<"/customers/[id
             <button className="btn btn-primary shrink-0">Save</button>
           </form>
           {activity.length === 0 ? (
-            <p className="text-ink-soft">Nothing logged yet. Notes, stage changes, emails, and visits show up here.</p>
+            <p className="text-text-muted">Nothing logged yet. Notes, stage changes, emails, and visits show up here.</p>
           ) : (
-            <ol className="space-y-3 border-l-2 border-line pl-4">
+            <ol className="space-y-3 border-l-2 border-border pl-4">
               {activity.map((a) => (
                 <li key={a.id} className="relative">
-                  <span aria-hidden className={`absolute top-1.5 -left-[1.4rem] h-2.5 w-2.5 rounded-full ${a.actor_type === "assistant" ? "bg-ava" : "bg-ink-soft"}`} />
+                  <span aria-hidden className={`absolute top-1.5 -left-[1.4rem] h-2.5 w-2.5 rounded-full ${a.actor_type === "assistant" ? "bg-accent" : "bg-text-muted"}`} />
                   <p className={a.kind === "note" ? "whitespace-pre-wrap" : "font-medium"}>{a.summary}</p>
-                  <p className="text-sm text-ink-soft">
+                  <p className="text-sm text-text-muted">
                     {formatDateTime(a.created_at)}
                     {a.actor_type === "assistant" ? ", Aiva" : a.actor_id ? `, ${names.get(a.actor_id) ?? "Team member"}` : ""}
                   </p>
@@ -93,7 +93,7 @@ export default async function CustomerPage({ params }: PageProps<"/customers/[id
       </div>
 
       <aside className="space-y-4">
-        <div className="rounded-xl border border-line bg-surface p-4">
+        <div className="rounded-xl border border-border bg-surface p-4">
           <StageSelect customerId={id} stageId={c.stage_id} stages={stages} />
           <dl className="mt-4 space-y-3 text-sm">
             <Row label="Status" value={c.status[0].toUpperCase() + c.status.slice(1)} />
@@ -108,22 +108,22 @@ export default async function CustomerPage({ params }: PageProps<"/customers/[id
         </div>
 
         {c.people_notes && (
-          <div className="rounded-xl border border-line bg-surface p-4">
+          <div className="rounded-xl border border-border bg-surface p-4">
             <h2 className="mb-1 font-bold">About {c.contact_name || "them"}</h2>
-            <p className="whitespace-pre-wrap text-ink-soft">{c.people_notes}</p>
+            <p className="whitespace-pre-wrap text-text-muted">{c.people_notes}</p>
           </div>
         )}
 
-        <div className="rounded-xl border border-line bg-surface p-4">
+        <div className="rounded-xl border border-border bg-surface p-4">
           <h2 className="mb-2 font-bold">Upcoming appointments</h2>
           {(apptRes.data ?? []).length === 0 ? (
-            <p className="text-sm text-ink-soft">None scheduled.</p>
+            <p className="text-sm text-text-muted">None scheduled.</p>
           ) : (
             <ul className="space-y-2 text-sm">
               {(apptRes.data ?? []).map((a) => (
                 <li key={a.id}>
                   <p className="font-semibold">{formatDateTime(a.starts_at)}</p>
-                  {a.location && <p className="text-ink-soft">{a.location}</p>}
+                  {a.location && <p className="text-text-muted">{a.location}</p>}
                 </li>
               ))}
             </ul>
@@ -131,9 +131,9 @@ export default async function CustomerPage({ params }: PageProps<"/customers/[id
         </div>
 
         {c.notes && (
-          <div className="rounded-xl border border-line bg-surface p-4">
+          <div className="rounded-xl border border-border bg-surface p-4">
             <h2 className="mb-1 font-bold">Notes</h2>
-            <p className="whitespace-pre-wrap text-ink-soft">{c.notes}</p>
+            <p className="whitespace-pre-wrap text-text-muted">{c.notes}</p>
           </div>
         )}
       </aside>
@@ -144,13 +144,13 @@ export default async function CustomerPage({ params }: PageProps<"/customers/[id
 function Action({ href, label }: { href?: string; label: string }) {
   if (!href) {
     return (
-      <span aria-disabled className="flex min-h-14 items-center justify-center rounded-xl border border-dashed border-line text-sm font-semibold text-ink-soft/60">
+      <span aria-disabled className="flex min-h-14 items-center justify-center rounded-xl border border-dashed border-border text-sm font-semibold text-text-muted/60">
         {label}
       </span>
     );
   }
   return (
-    <a href={href} className="flex min-h-14 items-center justify-center rounded-xl bg-surface text-sm font-semibold shadow-[inset_0_0_0_1px_var(--line)] hover:bg-surface-2">
+    <a href={href} className="flex min-h-14 items-center justify-center rounded-xl bg-surface text-sm font-semibold shadow-[inset_0_0_0_1px_var(--border)] hover:bg-surface-2">
       {label}
     </a>
   );
@@ -160,7 +160,7 @@ function Row({ label, value }: { label: string; value: string | null }) {
   if (!value) return null;
   return (
     <div className="flex justify-between gap-3">
-      <dt className="text-ink-soft">{label}</dt>
+      <dt className="text-text-muted">{label}</dt>
       <dd className="min-w-0 text-right font-medium break-words">{value}</dd>
     </div>
   );

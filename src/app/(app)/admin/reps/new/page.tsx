@@ -12,7 +12,7 @@ export default async function NewRepPage() {
   return (
     <div className="mx-auto max-w-xl">
       <h2 className="mb-1 text-xl font-bold">Add salesperson</h2>
-      <p className="mb-5 text-ink-soft">They&apos;ll get an email invite with a link to sign in.</p>
+      <p className="mb-5 text-text-muted">They&apos;ll get an email invite with a link to sign in.</p>
       <InviteForm companies={(data ?? []) as { id: string; name: string }[]} />
     </div>
   );

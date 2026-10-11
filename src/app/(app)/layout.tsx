@@ -5,7 +5,7 @@ import { Nav } from "@/components/nav";
 
 export default async function AppLayout({ children }: LayoutProps<"/">) {
   const { profile, companies, current } = await getCompanyContext();
-  const brand = current?.brand_color || "#0e7c7b";
+  const brand = current?.brand_color || "#0176d3";
 
   return (
     <div style={{ ["--brand" as string]: brand }} className="min-h-dvh">

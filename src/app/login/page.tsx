@@ -18,11 +18,11 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   return (
     <main className="mx-auto flex min-h-dvh max-w-sm flex-col justify-center px-5 py-10">
       <div className="mb-8">
-        <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-ava text-2xl font-bold text-ava-ink">
+        <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-2xl font-bold text-on-primary">
           A
         </div>
         <h1 className="text-3xl font-bold tracking-tight">Sign in to Aiva</h1>
-        <p className="mt-2 text-ink-soft">Your customers, appointments, and follow-ups in one place.</p>
+        <p className="mt-2 text-text-muted">Your customers, appointments, and follow-ups in one place.</p>
       </div>
       {message && (
         <p className="mb-4 rounded-lg bg-danger-bg px-3 py-2 text-sm text-danger" role="alert">

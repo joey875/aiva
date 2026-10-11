@@ -16,7 +16,7 @@ export default async function NewCustomerPage() {
   return (
     <div className="mx-auto max-w-2xl">
       <h1 className="mb-1 text-2xl font-bold tracking-tight">New customer</h1>
-      <p className="mb-6 text-ink-soft">Adding to {current.name}.</p>
+      <p className="mb-6 text-text-muted">Adding to {current.name}.</p>
       <CustomerForm action={createCustomer} stages={stages} owners={owners} cancelHref="/customers" submitLabel="Add customer" />
     </div>
   );

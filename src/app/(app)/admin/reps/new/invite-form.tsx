@@ -24,8 +24,8 @@ export function InviteForm({ companies }: { companies: { id: string; name: strin
         <legend className="label">Companies they sell for</legend>
         <div className="space-y-1">
           {companies.map((c) => (
-            <label key={c.id} className="flex min-h-12 items-center gap-3 rounded-lg border border-line bg-surface px-3">
-              <input type="checkbox" name="company_ids" value={c.id} className="h-5 w-5 accent-[var(--ava)]" />
+            <label key={c.id} className="flex min-h-12 items-center gap-3 rounded-lg border border-border bg-surface px-3">
+              <input type="checkbox" name="company_ids" value={c.id} className="h-5 w-5 accent-[var(--primary)]" />
               {c.name}
             </label>
           ))}

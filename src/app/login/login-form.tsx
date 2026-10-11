@@ -12,11 +12,11 @@ export function LoginForm({ google }: { google: boolean }) {
   if (state.sent) {
     return (
       <div
-        className="rounded-xl border border-line bg-surface p-5"
+        className="rounded-xl border border-border bg-surface p-5"
         role="status"
       >
         <p className="text-lg font-semibold">Check your email</p>
-        <p className="mt-1 text-ink-soft">
+        <p className="mt-1 text-text-muted">
           If that address has access, a sign-in link is on its way. It works
           once and expires in an hour.
         </p>
@@ -51,10 +51,10 @@ export function LoginForm({ google }: { google: boolean }) {
       </form>
       {google && (
         <>
-          <div className="flex items-center gap-3 text-sm text-ink-soft">
-            <span className="h-px flex-1 bg-line" />
+          <div className="flex items-center gap-3 text-sm text-text-muted">
+            <span className="h-px flex-1 bg-border" />
             or
-            <span className="h-px flex-1 bg-line" />
+            <span className="h-px flex-1 bg-border" />
           </div>
           <form action={signInWithGoogle}>
             <button type="submit" className="btn btn-quiet w-full">

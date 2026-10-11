@@ -21,10 +21,10 @@ export default async function RepsPage() {
   return (
     <div>
       <div className="mb-4 flex items-center justify-between gap-3">
-        <p className="text-ink-soft">{list.filter((p) => p.active).length} active</p>
+        <p className="text-text-muted">{list.filter((p) => p.active).length} active</p>
         <Link href="/admin/reps/new" className="btn btn-primary">Add salesperson</Link>
       </div>
-      <ul className="divide-y divide-line overflow-hidden rounded-xl border border-line bg-surface">
+      <ul className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
         {list.map((p) => {
           const theirs = (links ?? []).filter((l) => l.user_id === p.id).map((l) => companyName.get(l.company_id)).filter(Boolean);
           return (
@@ -33,13 +33,13 @@ export default async function RepsPage() {
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-semibold">
                     {p.full_name || p.email}
-                    {p.id === me.id && <span className="font-normal text-ink-soft"> (you)</span>}
+                    {p.id === me.id && <span className="font-normal text-text-muted"> (you)</span>}
                   </p>
-                  <p className="truncate text-sm text-ink-soft">
+                  <p className="truncate text-sm text-text-muted">
                     {theirs.length ? theirs.join(", ") : "No companies assigned"}
                   </p>
                 </div>
-                <span className="shrink-0 text-sm font-semibold text-ink-soft">{p.active ? ROLE[p.role] : "Deactivated"}</span>
+                <span className="shrink-0 text-sm font-semibold text-text-muted">{p.active ? ROLE[p.role] : "Deactivated"}</span>
               </Link>
             </li>
           );

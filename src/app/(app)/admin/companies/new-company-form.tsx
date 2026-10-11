@@ -13,7 +13,7 @@ export function NewCompanyForm() {
       </div>
       <div>
         <label className="label" htmlFor="new-color">Color</label>
-        <input id="new-color" name="brand_color" type="color" defaultValue="#0e7c7b" className="h-12 w-16 cursor-pointer rounded-lg border border-line bg-surface p-1" />
+        <input id="new-color" name="brand_color" type="color" defaultValue="#0176d3" className="h-12 w-16 cursor-pointer rounded-lg border border-border bg-surface p-1" />
       </div>
       <button disabled={pending} className="btn btn-primary disabled:opacity-60">{pending ? "Adding…" : "Add company"}</button>
       {state.error && <p className="w-full text-sm text-danger">{state.error}</p>}

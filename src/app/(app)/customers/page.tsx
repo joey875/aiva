@@ -63,7 +63,7 @@ export default async function CustomersPage({ searchParams }: PageProps<"/custom
           <EmptyState title="No customers yet" body={`Add your first ${current.name} customer to start the pipeline.`} href="/customers/new" cta="Add customer" />
         )
       ) : (
-        <ul className="divide-y divide-line overflow-hidden rounded-xl border border-line bg-surface">
+        <ul className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
           {customers.map((c) => {
             const overdue = c.next_step_at && new Date(c.next_step_at) < new Date();
             return (
@@ -71,17 +71,17 @@ export default async function CustomersPage({ searchParams }: PageProps<"/custom
                 <Link href={`/customers/${c.id}`} className="flex items-center gap-3 px-4 py-3 hover:bg-surface-2">
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-semibold">{customerName(c)}</p>
-                    <p className="truncate text-sm text-ink-soft">
+                    <p className="truncate text-sm text-text-muted">
                       {[c.business_name && c.contact_name, c.city, names?.get(c.owner_id)].filter(Boolean).join(", ")}
                     </p>
                     {c.next_step && (
-                      <p className={`mt-0.5 truncate text-sm ${overdue ? "font-semibold text-attention" : "text-ink-soft"}`}>
+                      <p className={`mt-0.5 truncate text-sm ${overdue ? "font-semibold text-attention" : "text-text-muted"}`}>
                         {c.next_step_at ? `${relativeDay(c.next_step_at)}: ` : ""}
                         {c.next_step}
                       </p>
                     )}
                   </div>
-                  <span className="shrink-0 rounded-full bg-surface-2 px-2.5 py-1 text-xs font-semibold text-ink-soft">
+                  <span className="shrink-0 rounded-full bg-surface-2 px-2.5 py-1 text-xs font-semibold text-text-muted">
                     {c.stage_id ? stageName.get(c.stage_id) : "No stage"}
                   </span>
                 </Link>
