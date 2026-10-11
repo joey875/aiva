@@ -1,5 +1,6 @@
 import { getCompanyContext } from "@/lib/companies";
 import { isAdmin } from "@/lib/types";
+import { AivaVoice } from "@/components/aiva-voice";
 import { CompanySwitcher } from "@/components/company-switcher";
 import { Nav } from "@/components/nav";
 
@@ -21,6 +22,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
       </header>
       <main className="mx-auto max-w-6xl px-4 pt-5 pb-28 md:pb-12">{children}</main>
       <Nav admin={isAdmin(profile)} variant="bar" />
+      <AivaVoice />
     </div>
   );
 }
